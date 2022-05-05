@@ -1,28 +1,41 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+
+import CategoryScreen from "./Screens/CategoryScreen";
+import MealsOverViewScreen from "./Screens/MealsOverViewScreen.js";
+import MealDetailScreen from "./Screens/MealDetailScreen";
 
 
-const fetchFont = () =>{
-  return Font.loadAsync({
-    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold' : require('./assets/fonts/OpenSans-Bold.ttf')
-  })
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  const [fontLoaded, setFontLoaded] = useState(false);
-
-  if (!fontLoaded){
-    return <AppLoading startAsync={fetchFont} onFinish={()=>  setFontLoaded(true)} />
-  }
-
-  return <MealsNavigation/>
+  return (
+    <>
+      <StatusBar style='light' />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="All Categories"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#593d3b'
+            },
+            headerTitleAlign: 'center',
+            headerTintColor: 'white',
+            contentStyle: { backgroundColor: '#8a7968' }
+          }}>
+          <Stack.Screen name="AllCategories" component={CategoryScreen}
+            options={{
+              title: "HOME",
+            }} />
+          <Stack.Screen name="MealsOverView" component={MealsOverViewScreen}
+            options={{
+              title: "MEALS RECIPE",
+            }} />
+          <Stack.Screen name="MealIemDetailed" component={MealDetailScreen} options={{title:" RECIPE"}} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+  )
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+

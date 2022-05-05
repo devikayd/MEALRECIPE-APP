@@ -14,7 +14,7 @@ const MealDetailScreen = ({ route , navigation}) => {
   const selectedMealItem = MEALS.find((meal) => meal.id === mealId);
 
   function onPressIconHandler(){
-    console.log(;pressed )
+    console.log('pressed' )
     
   }
   

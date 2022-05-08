@@ -2,8 +2,7 @@ import { View, Text, FlatList } from 'react-native'
 import React,{ useLayoutEffect } from 'react';
 
 import { MEALS, CATEGORIES } from '../data/dummy-data';
-import MealItems from '../components/MealItems';
-
+import MealList from '../components/MealList'
 
 
 const MealsOverViewScreen = ({ route, navigation }) => {
@@ -24,30 +23,9 @@ const MealsOverViewScreen = ({ route, navigation }) => {
 
   },[navigation, categIds])
 
-  function renderselectedCategMeals(itemData) {
-    
-    const item = itemData.item;
-    const MealItemProps = {
-      id: item.id,
-      title: item.title,
-      imageUrl: item.imageUrl,
-      affordability: item.affordability,
-      complexity: item.complexity,
-      duration: item.duration
-    }
-    
-    return <MealItems {...MealItemProps} />
-  }
-
-  return (
-    <View>
-      <FlatList
-        data={displayMeal}
-        renderItem={renderselectedCategMeals}
-        keyExtractor={(item) => item.id} 
-       />
-    </View>
-  )
+  
+return <MealList items={displayMeal} />
+  
 }
 
 export default MealsOverViewScreen

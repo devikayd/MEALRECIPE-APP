@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     detailedItem:{
         fontSize:15,
         paddingHorizontal:4,
-        color:'#5a189a'
+        color:'#1d3557'
     },
     pressedButton:{
         opacity: 0.5

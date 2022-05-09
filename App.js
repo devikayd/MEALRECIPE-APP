@@ -16,28 +16,27 @@ const Stack = createNativeStackNavigator();
 
 const DrawerOption = () => {
   return <Drawer.Navigator screenOptions={{
-    headerStyle: { backgroundColor: '#351401' },
+    headerStyle: { backgroundColor: '#f58c62' },
     headerTintColor: 'white',
-    sceneContainerStyle: { backgroundColor: '#3f2f25' },
-    drawerContentStyle: { backgroundColor: '#351401' },
-    drawerInactiveTintColor: 'white',
+    sceneContainerStyle: { backgroundColor: '#f1faee' },
+    drawerContentStyle: { backgroundColor: '#f1faee' },
+    drawerInactiveTintColor: 'black',
     drawerActiveTintColor: '#351401',
-    drawerActiveBackgroundColor: '#e4baa1',
+    drawerActiveBackgroundColor: '#f58c62',
+    headerTitleAlign: 'center',
+    drawerLabelStyle: {
+      marginTop: 5,
+      marginLeft: 4
+    }
   }}>
     <Drawer.Screen name="Categories" component={CategoryScreen}
       options={{
         title: 'All Categories',
-        drawerIcon: ({color, size}) => (
-          <Ionicons name="list" color={color} size={size} />
-        ),
       }} />
-    <Drawer.Screen name='Favourites' component={Favourites} 
-    option={{
-      title: 'Favourites',
-      drawerIcon: (color, size) => (
-        <Ionicons name="star" color={color} size={size} />
-      ),
-    }} />
+    <Drawer.Screen name='Favourites' component={Favourites}
+      option={{
+        title: 'Favourites',
+      }} />
   </Drawer.Navigator>
 }
 
@@ -46,33 +45,34 @@ export default function App() {
     <>
       <StatusBar style='light' />
       <FavouriteContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="All Categories"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: '#593d3b',
-            },
-            headerTintColor: 'white',
-            contentStyle: { backgroundColor: '#8a7968' }
-          }}>
-          <Stack.Screen name='draweroptions' component={DrawerOption}
-            options={{ headerShown: false }} />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="All Categories"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#f58c62',
+              },
+              headerTintColor: 'white',
+              contentStyle: { backgroundColor: '#f1faee' },
+              headerTitleAlign: 'center'
+            }}>
+            <Stack.Screen name='draweroptions' component={DrawerOption}
+              options={{ headerShown: false }} />
 
-          <Stack.Screen name="AllCategories" component={CategoryScreen}
-            options={{
-              title: "HOME",
-            }} />
-          <Stack.Screen name="MealsOverView" component={MealsOverViewScreen}
-            options={{
-              title: "MEALS RECIPE",
+            <Stack.Screen name="AllCategories" component={CategoryScreen}
+              options={{
+                title: "HOME",
+              }} />
+            <Stack.Screen name="MealsOverView" component={MealsOverViewScreen}
+              options={{
+                title: "MEALS RECIPE",
 
-            }} />
-          <Stack.Screen name="MealIemDetailed" component={MealDetailScreen}
-            options={{
-              title: " RECIPE"
-            }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+              }} />
+            <Stack.Screen name="MealIemDetailed" component={MealDetailScreen}
+              options={{
+                title: " RECIPE"
+              }} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </FavouriteContextProvider>
     </>
   )

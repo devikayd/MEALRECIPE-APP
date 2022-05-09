@@ -1,33 +1,34 @@
 import { View, Image, Text, StyleSheet } from 'react-native'
-import React, {useLayoutEffect, useContext} from 'react'
+import React, { useLayoutEffect, useContext } from 'react'
 
 import { MEALS } from '../data/dummy-data'
 import MealDetails from '../components/MealDetails';
 import { ScrollView } from 'react-native';
 import IconButton from '../components/IconButton';
 import { FavouriteContext } from '../store/FavouriteContextProvider';
+import { borderTopColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
-const MealDetailScreen = ({ route , navigation}) => {
+const MealDetailScreen = ({ route, navigation }) => {
 
   const favouriteMealContext = useContext(FavouriteContext);
-  
+
   const mealId = route.params.mealId;
   const selectedMealItem = MEALS.find((meal) => meal.id === mealId);
 
-  const mealIsFavourite = favouriteMealContext.ids.includes(mealId )
+  const mealIsFavourite = favouriteMealContext.ids.includes(mealId)
 
-  function favouriteHandler(){
-   
-    if(mealIsFavourite) {
-       
+  function favouriteHandler() {
+
+    if (mealIsFavourite) {
+
       favouriteMealContext.removeFavourite(mealId);
     }
-    else{
+    else {
       favouriteMealContext.addFavourite(mealId);
     }
-    
+
   }
-  
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
@@ -44,19 +45,23 @@ const MealDetailScreen = ({ route , navigation}) => {
 
   return (
     <ScrollView>
-      <View  style={styles.component}>
+      <View style={styles.component}>
         <View >
-        <Image source={{ uri: selectedMealItem.imageUrl }} style={styles.image} />
+          <Image source={{ uri: selectedMealItem.imageUrl }} style={styles.image} />
         </View>
         <Text style={styles.itemTitle}>{selectedMealItem.title.toUpperCase()}</Text>
         <MealDetails duration={selectedMealItem.duration} affordability={selectedMealItem.affordability}
           complexity={selectedMealItem.complexity} />
         <View style={styles.subtitleContainer}>
+          <View style={styles.hline} />
           <Text style={styles.subtitle}> Ingredients </Text>
+          <View style={styles.hline} />
           {selectedMealItem.ingredients.map((ingredient) => (
             <Text key={ingredient} style={styles.listing}> {ingredient}</Text>
           ))}
+          <View style={styles.hline} />
           <Text style={styles.subtitle}>Steps</Text>
+          <View style={styles.hline} />
           {selectedMealItem.steps.map((step) => (
             <Text key={step} style={styles.listing2} > {step} </Text>
           ))}
@@ -68,60 +73,66 @@ const MealDetailScreen = ({ route , navigation}) => {
 
 const styles = StyleSheet.create({
   component: {
-    margin: 5,
     marginBottom: 32
-    },
+  },
   itemTitle: {
     paddingTop: 9,
     textAlign: 'center',
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#000000'
+    color: '#1d3557'
   },
   image: {
     width: '100%',
     height: 300,
     marginBottom: 15,
-    borderRadius: 7,
   },
   subtitleContainer: {
-    justifyContent:'center',
-    alignContent:'center',
+    justifyContent: 'center',
+    alignContent: 'center',
     paddingTop: 10,
     paddingBottom: 10
   },
   subtitle: {
-    paddingTop:8,
-    margin:10,
-    borderRadius:8,
+    margin: 10,
+    padding:14,
+    borderRadius: 4,
     fontSize: 18,
     justifyContent: 'center',
     textAlign: 'center',
-    height:45,
-    backgroundColor:'#5a189a',
-    color:'white'
+    height: 59,
+    backgroundColor: '#457b9d',
+    color: 'white',
 
   },
   listing: {
-    paddingTop:20,
-    textAlign:'center',
-    borderRadius:8,
+    paddingTop: 20,
+    textAlign: 'center',
+    borderRadius: 4,
     margin: 10,
-    height:68,
-    backgroundColor:'#e0aaff',
-    fontSize:14
+    height: 68,
+    backgroundColor: '#a8dadc',
+    fontSize: 14
 
   },
-  listing2:{
-    alignContent:'space-between',
-    paddingTop:10,
-    textAlign:'center',
-    borderRadius:8,
+  listing2: {
+    alignContent: 'space-between',
+    paddingTop: 10,
+    textAlign: 'center',
+    borderRadius: 4,
     margin: 10,
-    minHeight:70,
-    maxHeight:100,
-    backgroundColor:'#e0aaff',
-    fontSize:14
+    minHeight: 70,
+    maxHeight: 100,
+    backgroundColor: '#a8dadc',
+    fontSize: 14
+  },
+  hline: {
+    borderBottomColor: '#e76f51',
+    borderBottomWidth: 4,
+    borderRadius: 4,
+    margin: 10,
+    marginTop: 10,
+    marginBottom: 10
   }
 })
 
